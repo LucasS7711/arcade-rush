@@ -1,26 +1,23 @@
-ARCADE RUSH — WEBSITE VERSION
+ARCADE RUSH - WEBSITE VERSION
 
 FILES
-- index.html: page structure
-- style.css: page styling and responsive canvas sizing
-- game.js: game logic, drawing, keyboard/mouse controls, sound
+- index.html: webpage
+- style.css: visual styling
+- game.js: game code
 
-RUN IT ON YOUR COMPUTER
-1. Extract ArcadeRush-Website.zip into a folder.
-2. Open index.html in Chrome, Edge, or Firefox.
-3. Click the game area once if the keyboard does not respond immediately.
+RUN LOCALLY
+Keep all three files in the same folder and double-click index.html.
+For best results, open with Chrome or Edge.
 
-PUBLISH IT FREE WITH GITHUB PAGES
-1. Sign in to GitHub and create a new public repository named arcade-rush.
-2. Upload index.html, style.css, and game.js to the repository's top level (not inside another folder).
-3. Open the repository's Settings → Pages.
-4. Under Build and deployment, choose Deploy from a branch.
-5. Select the main branch and / (root), then Save.
-6. Wait a minute or two. GitHub will show the public website address in Settings → Pages.
+CONTROLS
+- Main menu: Up/Down to select; Enter to start or confirm. You can also click menu items.
+- Practice: Left/Right to choose a game; Enter to play that game.
+- In games: Arrow keys and Space, depending on the game.
+- P: pause/resume a speedrun
+- R: restart current game
+- Tab: skip current game
+- Escape: return to menu
 
-NOTES
-- The website version is a JavaScript/Canvas remake of the Java Swing game, not a direct execution of the Java file.
-- Best time and best failure count are stored in the current browser using localStorage.
-- Sound starts after the first key or mouse interaction because browsers restrict autoplay.
-- Minesweeper: left click reveals; right click flags.
-- TAB skips a stage; P pauses a speedrun; R restarts the current stage; ESC returns to the menu.
+PUBLISH WITH GITHUB PAGES
+Upload index.html, style.css, and game.js to the root of a GitHub repository.
+Then open Settings > Pages, select Deploy from a branch, choose main and /(root), and save.
