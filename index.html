@@ -6,4 +6,23 @@
 </head>
 <body><main class="shell"><header><div class="brand">ARCADE <b>RUSH</b></div><div class="tag">10 GAMES · ONE CONTINUOUS RUN</div></header>
 <div class="screen-wrap"><canvas id="game" width="960" height="540" aria-label="Arcade Rush game"></canvas></div>
+<nav class="mouse-controls" aria-label="Game controls">
+  <div class="control-row menu-controls">
+    <button type="button" id="start-run">Start Run</button>
+    <label class="practice-picker">Practice game
+      <select id="practice-game"></select>
+    </label>
+    <button type="button" id="start-practice">Play Practice</button>
+    <button type="button" id="show-controls">Controls</button>
+  </div>
+  <div class="control-row active-controls">
+    <button type="button" id="pause-game">Pause</button>
+    <button type="button" id="restart-game">Restart</button>
+    <button type="button" id="skip-game">Skip Game</button>
+    <button type="button" id="main-menu">Main Menu</button>
+    <button type="button" id="back-menu">Back to Menu</button>
+    <button type="button" id="retry-run">Retry Run</button>
+  </div>
+  <p class="control-hint">Use the buttons for menus and game actions. Mini-games still use their on-screen instructions and keyboard controls.</p>
+</nav>
 <footer><span>KEYBOARD: ARROWS · SPACE · ENTER</span><span>BEST TIME SAVED IN THIS BROWSER</span></footer></main><script src="game.js"></script></body></html>

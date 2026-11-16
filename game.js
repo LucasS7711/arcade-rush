@@ -39,5 +39,23 @@ let last=performance.now();function frame(now){let dt=Math.min(.04,(now-last)/10
 function keyDown(e){let k=e.key;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','Tab'].includes(k))e.preventDefault();if(down.has(k))return;down.add(k);if(state==='menu'){if(k==='ArrowUp')menu=(menu+2)%3;else if(k==='ArrowDown')menu=(menu+1)%3;else if(menu===1&&k==='ArrowLeft')practiceIndex=(practiceIndex+9)%10;else if(menu===1&&k==='ArrowRight')practiceIndex=(practiceIndex+1)%10;if(k==='Enter'||k===' '){if(menu===0)startRun(false);else if(menu===1)startRun(true,practiceIndex);else state='controls'}}else if(state==='controls'){if(k==='Escape'||k==='Enter'||k===' ')state='menu'}else if(state==='results'){if(k==='Enter')startRun(false);if(k==='Escape'||k.toLowerCase()==='m')state='menu'}else if(state==='pause'){if(k.toLowerCase()==='p'){runStart+=performance.now()-pauseAt;state='play'}if(k==='Escape'){state='menu';game=null}}else if(state==='play'||state==='practice'){if(k.toLowerCase()==='p'&&!practice){pauseAt=performance.now();state='pause'}else if(k==='Escape'){state='menu';game=null}else if(k.toLowerCase()==='r')fail();else if(k==='Tab')skip();else game.key(k)}}
 function keyUp(e){down.delete(e.key)}
 function pointer(e){let r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;if(state==='menu'&&x>=326&&x<=634){if(y>=227&&y<=267){menu=0;startRun(false)}else if(y>=276&&y<=316){menu=1;startRun(true,practiceIndex)}else if(y>=325&&y<=365){menu=2;state='controls'}return}if(state==='menu'&&menu===1){if(y>405&&y<455){if(x<W/2)practiceIndex=(practiceIndex+9)%10;else practiceIndex=(practiceIndex+1)%10}return}if(game&&(state==='play'||state==='practice')){if(x>810&&y<50)skip();else game.mouse(x,y,e.button===2?2:1)}}
-window.addEventListener('keydown',keyDown,true);window.addEventListener('keyup',keyUp,true);window.addEventListener('blur',()=>down.clear());canvas.addEventListener('pointerdown',e=>{canvas.focus();pointer(e)});canvas.addEventListener('contextmenu',e=>e.preventDefault());canvas.tabIndex=0;canvas.focus();requestAnimationFrame(frame);
+window.addEventListener('keydown',keyDown,true);window.addEventListener('keyup',keyUp,true);window.addEventListener('blur',()=>down.clear());canvas.addEventListener('pointerdown',e=>{canvas.focus();pointer(e)});canvas.addEventListener('contextmenu',e=>e.preventDefault());canvas.tabIndex=0;
+// Real HTML buttons make every menu and run-level action mouse accessible.
+const byId=id=>document.getElementById(id);
+const picker=byId('practice-game');
+names.forEach((name,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=`${i+1}. ${name}`;picker.appendChild(o)});
+picker.value=String(practiceIndex);
+picker.addEventListener('change',()=>{practiceIndex=Number(picker.value)||0});
+byId('start-run').addEventListener('click',()=>startRun(false));
+byId('start-practice').addEventListener('click',()=>startRun(true,practiceIndex));
+byId('show-controls').addEventListener('click',()=>{state='controls';game=null});
+byId('back-menu').addEventListener('click',()=>{state='menu';game=null});
+byId('main-menu').addEventListener('click',()=>{state='menu';game=null;down.clear()});
+byId('pause-game').addEventListener('click',()=>{if(state==='pause'){runStart+=performance.now()-pauseAt;state='play'}else if(state==='play'&&!practice){pauseAt=performance.now();state='pause'}});
+byId('restart-game').addEventListener('click',()=>{if(game)fail()});
+byId('skip-game').addEventListener('click',skip);
+byId('retry-run').addEventListener('click',()=>startRun(false));
+function syncButtons(){const menuMode=state==='menu',playing=state==='play'||state==='practice'||state==='pause',controls=state==='controls',results=state==='results';document.querySelector('.menu-controls').style.display=menuMode?'flex':'none';document.querySelectorAll('.active-controls button').forEach(b=>b.style.display='none');if(playing){byId('main-menu').style.display='inline-block';byId('restart-game').style.display='inline-block';byId('skip-game').style.display='inline-block';if(!practice)byId('pause-game').style.display='inline-block';byId('pause-game').textContent=state==='pause'?'Resume':'Pause'}if(controls)byId('back-menu').style.display='inline-block';if(results){byId('retry-run').style.display='inline-block';byId('back-menu').style.display='inline-block'}}
+const originalRender=render;render=function(){originalRender();syncButtons()};
+requestAnimationFrame(frame);
 })();
