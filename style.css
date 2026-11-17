@@ -9,3 +9,7 @@
 .practice-picker{display:flex;gap:8px;align-items:center;color:#a9bdd8;font-size:13px}
 .control-hint{text-align:center;color:#91a0be;font-size:12px;margin:10px 0 0}
 .active-controls{margin-top:0}
+
+.game-error{margin:10px 0 0;padding:10px 12px;border:1px solid #d45b74;border-radius:8px;background:#3b1725;color:#ffdce4;font-size:13px;text-align:center}
+.game-error[hidden]{display:none}
+@media(max-width:640px){body{padding:8px}.tag{display:none}.mouse-controls{padding:10px}.control-hint{line-height:1.45}}

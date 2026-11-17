@@ -1,23 +1,31 @@
-ARCADE RUSH - WEBSITE VERSION
+ARCADE RUSH - WEBSITE VERSION (FIXED)
 
 FILES
-- index.html: webpage
+- index.html: webpage and mouse-accessible menu buttons
 - style.css: visual styling
-- game.js: game code
+- game.js: game logic and all 10 mini-games
+
+IMPORTANT
+Keep index.html, style.css, and game.js together in the same folder.
+The game is fixed so each mini-game is constructed correctly when launched.
 
 RUN LOCALLY
-Keep all three files in the same folder and double-click index.html.
-For best results, open with Chrome or Edge.
+1. Put all three files in one folder.
+2. Double-click index.html.
+3. Open with a current version of Chrome or Edge.
 
 CONTROLS
-- Main menu: Up/Down to select; Enter to start or confirm. You can also click menu items.
-- Practice: Left/Right to choose a game; Enter to play that game.
+- Use the webpage buttons to Start Run, choose a Practice game, or open Controls.
 - In games: Arrow keys and Space, depending on the game.
 - P: pause/resume a speedrun
 - R: restart current game
 - Tab: skip current game
 - Escape: return to menu
+- Minesweeper: click tiles; right-click to flag.
 
 PUBLISH WITH GITHUB PAGES
-Upload index.html, style.css, and game.js to the root of a GitHub repository.
-Then open Settings > Pages, select Deploy from a branch, choose main and /(root), and save.
+1. Replace the old index.html, style.css, game.js, and README.txt in your repository with these fixed versions.
+2. Make sure all files are in the repository root (not inside a subfolder).
+3. Open Settings > Pages.
+4. Select Deploy from a branch, choose main and /(root), and save.
+5. Reload the published page with Ctrl+Shift+R to avoid an old cached copy.
